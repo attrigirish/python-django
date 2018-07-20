@@ -1,0 +1,53 @@
+from django.shortcuts import render
+
+
+from main.models import Profile
+
+
+#Saving Record in the Database
+def CreateProfile(request):
+	obj=Profile()
+	obj.id=1
+	obj.name='Girish Attri'
+	obj.gender='Male'
+	obj.age=32
+
+	obj.save()
+
+#Quering Database Records
+def DisplayProfile(request):
+	#objs=Profile.objects.filter(id=1)	Returns multiple records with the matching criteria	
+	obj=Profile.objects.get(id=1)	#Return	a single record with matching criteria
+
+	output=str(obj.id) + "<br>" + obj.name + "<br>" + obj.gender + "<br>" + str(obj.age)
+
+	return HttpResponse(output)
+
+def DisplayProfiles(request);
+	objs=Profile.objects.filter()	#Returns all database records
+	output=""
+	for p in objs:
+		output=output + str(obj.id) + " " + obj.name + " " + obj.gender + " " + str(obj.age) + "<br>"
+	
+	return HttpResponse(output)	
+
+def DeleteProfile(request):
+	#Deleting Multiple Records
+	#Profile.objects.filter(id=1).delete()	#Delete all record with matchin criteria
+
+	#Deleting Multiple Records
+	#Profile.objects.filter(gender='Male') #Delete all males from the database
+
+	#Deleting Single Record
+	Profile.objects.get(id=1).delete()	
+
+def UpdateProfile(request):
+	#Updating Multiple Records
+	#Profile.objects.filter(id=1).update(gender='Male')	
+
+	#Updating Single Record
+	Profile.objects.get(id=1).update(gender='Male')
+
+
+
+
