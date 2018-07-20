@@ -1,0 +1,63 @@
+Querying Models
+
+
+Fetching All records
+
+Student.objects.values_list() : Returns a queryset with all records in the dataset
+
+
+Filtering Columns
+
+Student.objects.values_list("name","fees") : Returns name and fees of all students
+
+
+Scalar Query
+
+Student.objects.get(fieldname=value) : Returns a single record with the matching value
+
+
+Filtering Records
+
+Student.objects.filter(fieldname=value) : Returns all records with the matching criteria
+
+
+
+Updating Records in the Database
+
+s=Student.objects.get(id=3)
+s.course="ACWD"
+s.name="Ankit"
+s.fees=23000
+s.save()
+
+
+from django.db.models import F
+
+Student.objects.values_list().update(fees=F('fees')+F('fees')*.03)
+
+or
+
+s=Student.objects.filter(course="ACCP")
+s.update(fees=fees+fees*.03)
+
+
+Student.objects.get(id=3).update(name="Ankit")	//Error, Cannot be run on a single instance
+
+
+
+
+Deleting Records from the Database
+
+
+Deleting Single Record
+
+Student.objects.get(id=1).delete()
+or
+s=Student.objects.get(id=1)
+s.delete()
+
+
+Deleting Multiple Records
+
+Student.objects.filter(course='ACCP').delete()
+

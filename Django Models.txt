@@ -1,0 +1,220 @@
+Django Models
+
+A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table.
+
+A Model allows us to do following things:
+
+1) Create tables and define relationship between them.
+
+2) Modify tables and relationship between them.
+
+3) Access data stored in tables using Django ORM 
+
+
+
+Configuring Databases
+
+Sqlite
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
+Mysql
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'aptech',
+        'USER': 'girish',
+        'PASSWORD': 'girish',
+        'HOST': 'localost',
+        'PORT': '3306',
+    }
+}
+
+
+
+
+------------------------------------------------------------
+
+Creating Models
+
+from django.db import models
+
+class Student(models.Model):
+    name = models.CharField(max_length=30)
+    course = models.CharField(max_length=30)
+    fees = models.DecimalField(max_digits=10,decimal_places=2)
+
+
+
+The sample table created from the above model would be like:
+
+CREATE TABLE students_student (
+    id serial NOT NULL PRIMARY KEY,
+    name varchar(30) NOT NULL,
+    course varchar(30) NOT NULL,
+    fees decimal
+);
+
+
+
+---------------------------------------------------------------------------
+
+
+Migrating Databases
+
+1. Migrating specific App Database
+
+python manage.py makemigrations Customer
+
+2. Migrating All Apps Database
+
+python manage.py migrate
+
+
+---------------------------------------------------------------------------
+
+
+Model Fields
+
+
+1. CharField	
+A Field to store small and medium sized string. It acts as a base for most other fields. It doesn't provide any validation
+
+2. DateField	
+A Field to store date represented by python's datetime.date instance. It doesn't inherits from CharField. Django ensures that data provided to DateField are valid dates only
+
+3. DateTimeField	
+A Field to store date and time represented by python's datetime.datetime instance. It provides validation too.
+
+4. EmailField	
+A CharField to store Email address. It verifies whether value entered value is valid email or not
+
+5. URLField	
+A CharField to store URL. It provides validation.
+
+6. SlugField	
+A CharField to store slug. It only accepts alphabets, numbers and underscores and hyphens
+
+7. TextField	
+A field to store large amount of text. Use this field to store content of blog post. In Python this field translates to string. In databases it translates to TEXT field. Like CharField this field doesn't provide any validation
+
+8. BooleanField	
+A field to store True or False. In the context python it translates to boolean True and False. In the context of database (as we are using SQLite) it is stored as integer (1) True and (0) False. Remember SQLite3 has integer type to handle integers.
+
+9. IntegerField	
+A field to store integer values from -2147483648 to 2147483647. It checks wheter value entered is number or not.
+
+10. DecimalField	
+A field to store decimal number.
+
+11. ForeignKey	
+A Field to define define one-to-many relations.
+
+12. ManyToManyField	
+A Field to define define many-to-many relations.
+
+
+
+---------------------------------------------------------------------
+
+
+Field Options
+
+1. null
+2. blank
+3. choices
+4. default
+5. primary_key
+6. max_length
+7. unique
+
+
+---------------------------------------------------------------------
+
+
+Creating Relationships
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    author = models.ForeignKey(Author)
+
+
+
+---------------------------------------------------------------
+
+Django ORM
+
+Inserting Record into the the database
+
+
+1. Inserting Single Record
+
+from students.models import Student
+
+Student.objects.create(name='Girish Attri',course='ACCP',fees=12000)
+or
+s=Student('Girish Attri','ACCP',12000)
+s.save()
+
+
+2. Inserting Multiple Recors
+
+from students.models import Student
+
+Student.objects.bulk_create([
+    Student(name='Ankit', course="ACWD" , fees=12000),
+    Student(name='Ravi', course="ACCP" , fees=14000),
+])
+
+
+
+Fetching Data from the Database
+
+1. Fetching All columns
+Student.objects.values_list()
+
+2. Fetching Selected Columns
+Student.objects.values_list("id", "name")
+
+3. Fetching Records using condition
+s = Student.objects.get(name='Girish Attri')
+or
+Student.objects.filter(name="Girish Attri")
+
+
+
+
+Updating Records in the Database
+
+s = Student.objects.get(id=1)
+s.name="Ravi"
+s.save()
+
+
+Deleting Records from the Database
+
+s = Student.objects.get(id=1)
+s.delete()
+
+or
+
+Student.objects.filter(course="ACCP").delete()
+
+
+
+Executing Raw queries
+
+Student.objects.raw('SELECT name, course FROM aptech_student')
+
+or
+
+Student.objects.raw('SELECT name, course FROM aptech_student where id=%d',[4])
+

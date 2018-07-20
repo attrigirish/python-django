@@ -1,0 +1,27 @@
+AJAX : Asynchrnous JavaScript and XML
+
+AJAX is a concept that is used to update web page contents partially. AJAX uses an asynchronous HttpRequest to download the data (resource) from the web server. Unlike a normal HttpRequest the UI does not hang in case of an asynchronous request. That means the user can still continue to work on the page while the content is being downloaded in the background.
+
+
+//Step 1 : Create an HttpRequest
+
+xhr=new XMLHttpRequest();
+
+//Step 2 : Initialize the request
+
+xhr.open(request_method,path);
+xhr.open('get','/nifty/');
+
+
+//Step 3 : Sending the request
+xhr.send();
+
+
+
+Request States
+
+0 : Uninitialized
+1 : Initialized
+2 : Sent
+3 : Downloading
+4 : Done

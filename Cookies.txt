@@ -1,0 +1,48 @@
+Cookies
+
+HTTP is a stateless protocol. In other words when a request is sent to the server, it has has no idea whether you are requesting the page for the first time or you are same person who has visited this page thousand times before.
+
+Cookie is a small piece of data stored in the user's browser which is sent by the server. They are commonly used to store user preferences.
+
+This is how cookies works in general:
+
+1) Browser sends the request to the server.
+2) The server sends the response along with one or more cookie to the browser.
+3) The browser saves the cookie it received from the server. From now on, browser will send this cookie to the server, every time a request is made to the server. The browser will keep sending the cookie to the server along with each request until the cookie expires.
+4) When cookie expires, it is removed from the browser.
+
+
+Key Points
+1. A cookie cannot be greater than 4KB
+2. A maximum of 20 cookies can be stored per domain
+3. Cookies can store text type information only.
+4. Cookies are not reliable.
+
+
+
+Creating cookies
+
+syntax
+set_cookie(name, value, max_age=None)
+
+e.g.
+response.set_cookie('color', 'blue')
+
+
+Reading cookies
+
+syntax:
+request.COOKIES['cookie-name'];
+
+e.g.
+request.COOKIES.get('color')
+
+
+Deleting a cookie
+
+syntax:
+response.delete_cookie(cookie_name)
+
+e.g.
+response.delete_cookie("visits")
+

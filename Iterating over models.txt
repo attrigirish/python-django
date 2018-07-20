@@ -1,0 +1,18 @@
+Iterating over QuerySets
+
+
+output=""
+s=Student.objects.values_list()
+for item in s:
+	output = output + str(item[0]) + " " + item[1] + " " + item[2] + " " + str(item[3]) + "<br>"
+return HttpResponse(output)
+
+
+
+Iterating over Student Lists
+
+output=""
+s=Student.objects.filter(course="ACCP")
+for item in s:
+	output = output + item.id + " " + item.name + " " + item.course + " " + item.fees + "<br>"
+return HttpResponse(output)

@@ -1,0 +1,239 @@
+Django
+
+Django is a web development framework that assists in building and maintaining quality web applications.
+
+
+Advantage of Django
+
+1. It is open source.
+2. It's fast.
+3. you can use exisiting Python libraries to extend your app capabilities.
+4. Built-in admin site - Django comes with built-in admin site to manage the content of the site.
+5. Security - Django takes care of security issues like SQL injection, CSRF(Cross Site Reqest Forgery) etc. So you can just focus on the tasks you need to accomplish.
+6. Flexible and Scalable - Django is very flexible, you can amend the framework according to your particular needs. You can scale Django easily to meet your traffic demands.
+
+
+Advantages of Django
+
+1. Object-Relational Mapping (ORM) Support
+2. Multilingual Support
+3. Framework Support
+4. Administration GUI
+5. Development Environment
+
+
+Setting up Django Environment
+
+1. Python
+2. A virtual environment
+3. Django
+
+
+Python Package Manager
+
+In Python we use pip (Python Package Index) to install and manage different packages(libraries).
+
+
+
+Installing Python Virtual Environment
+
+A virtual environment helps us to run isolated instance of python/django projects on a machine without conflicting with one another.
+
+
+Step 1 : Installing Virtual Environment
+
+=> pip install virtualenv
+
+
+Step 2 : Creating Virtual Environment
+
+=> virtualenv env
+
+Step 3 : Activating Virtual Environment
+
+=> env\Scripts\activate.bat
+
+
+
+
+Installing Django
+
+=> pip install django
+
+
+
+Creating a new Django Project
+
+=> django-admin startproject <projectname>
+
+
+
+This command will create a new directory named django_project inside. The django_project directory is also known as Django Project Root Directory or simply Project Root Directory. Within this newly created directory you should see two items.
+
+1. A directory with the same name as your project root directory i.e django_project.
+2. A Python script called manage.py .
+
+Directory django_project  is called Project Configuration directory within this directory you will the find the following four python files.
+
+1. __init__.py - A special empty file that tells python that the current directory should be treated as python package.
+
+2. settings.py - This files contains all the settings and configuration of this Django project.
+
+3. urls.py - A python script to store the url patterns of the Django project.
+
+4. wsgi.py - A python script to run development server and also deploy the project to the production environment.
+
+
+manage.py - This file inside provides a list of commands which you can use to interact or maintain your Django project. 
+
+
+
+Django Applications
+
+A Django project is a collection of configurations and applications, these configurations and application together make up the whole web application or simply a web application or website.
+
+Django Built-in applications
+
+Django already comes bundled with several built-in apps. 
+
+Migrating Django Built-in Apps
+
+Migration is way to create or alter tables in the database.
+
+=> python manage.py migrate
+
+
+
+Creating Django Applications
+
+=> python manage.py startapp blog
+or
+=> django-admin startapp blog
+
+1. admin.py - This file contains all the configurations necessary to connect our app to the admin app supplied by Django. 
+2. apps.py - This file is used to write application specific configurations.
+3. models.py - This file stores our application's models. In other words, this is the place where we will define tables and relationships between them.
+4. test.py - This file contains functions to unit test our app.
+5. views.py - This file contains view functions which handle requests and return responses.
+
+-----------------------------------------------------------------
+
+
+Views in Django
+
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello Django")
+
+-----------------------------------------------------------------
+
+
+Configuring URLS
+
+from blog import views
+
+........
+
+ url(r'^$', views.index)
+
+
+
+-----------------------------------------------------------------
+
+Templates in  Django
+
+Django templates are nothing more than a text file containing static content and as well as a special dynamic markup specifying some logic, looping and display of data.
+
+
+def home(request):
+    t = template.Template("We Are learning {{post_title}}")
+    c = template.Context({'post_title': 'Learning Django.'})
+    html = t.render(c)
+    return HttpResponse(html)
+
+
+-----------------------------------------------------    
+
+Create a new directory called templates inside the blog app.
+
+Sample Django Template
+
+<html>
+    <head>
+        <title>Blog Post</title>
+    </head>
+
+    <body>
+    <h1>{{ post_title }}</h1>
+    </body>
+    
+</html>
+
+-----------------------------------------------------------------
+
+Loading Templates in Django
+
+from django import template
+
+def home(request):
+    t = template.loader.get_template('product.html')
+    html = t.render({'name':'Iphone 7', 'brand':'Apple', 'price':'47000'})
+    return HttpResponse(html)
+
+
+or
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'blog/product.html', {'product': Apple Iphone 7})
+
+
+
+---------------------------------------------------------------
+
+Template Tags
+
+If tag
+
+{% if condition %}
+    <p>Print this line</p>
+{% endif %}
+
+
+For tag
+
+{% for i in list %}
+    <p>The value of i is {{ i }}</p>
+{% endfor %}
+
+
+----------------------------------------------------------
+
+Template Filters 
+
+1. lower filter
+
+<p>{{ name|lower }}</p>
+
+2. upper filter
+
+<p>{{ name|upper }}</p>
+
+3. capfirst filter
+
+<p>{{ name|capfirst }}</p>
+
+4. title filter
+
+<p>{{ name|title }}</p>
+
+5. length filter
+
+<p>The length variable name is {{ name|length }}</p>
+
+
+
+-------------------------------------------------------------

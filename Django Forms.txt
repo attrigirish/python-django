@@ -1,0 +1,67 @@
+Django Forms
+
+The syntax of creating forms in Django is almost similar to that of creating models, the only differences are:
+
+1. Django form inherits from forms.Form instead of models.Model.
+2. Each form fields inherits forms.FieldName instead of models.FieldName.
+
+
+Form fields are similar to model fields in the following ways:
+
+1. Both corresponds to a Python type.
+2. Both validates data in the form.
+3. Both fields are reqired by default.
+4. Both type of fields know how to represent them in the templates as HTML. Every form fields is displayed in the browser as a HTML "widget". Each form field is assigned a reasonable Widget class, but you can also override this setting.
+
+
+
+e.g.
+
+
+from django import forms
+
+class StudentForm(forms.Form):
+    name = forms.CharField(max_length=50,required=True)
+    course = forms.CharField(max_length=50,required=True)
+    fees = forms.CharField(required=True) 
+
+
+
+
+Form States
+
+Unbound State: In Unbound state the form has no data associated with it. For example, when empty form displayed for the first time, it is in unbound state.
+
+Bound State: The act of giving data to the form is called binding a form. A form is in bound state if it has user submitted data. It doesn't matter whether data is valid or not.
+
+
+
+Form Fields
+
+1. BooleanField
+2. CharField
+3. ChoiceField
+4. DateField
+5. DateTimeField
+6. DecimalField
+7. EmailField
+8. FileField
+9. IntegerField
+10. MultipleChoiceField
+11. URLField
+
+
+
+
+
+Form Attributes
+
+1. required
+2. label
+3. initial
+4. help_text
+5. error_messages
+6. validators
+7. localize
+8. disabled
+9. max_length

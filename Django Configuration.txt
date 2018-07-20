@@ -1,0 +1,7 @@
+Django Configuration
+
+1. Changing Localhost port
+python manage.py runserver <port>
+
+2. Changing Ip Address
+python manage.py runserver <ip-address>:<port>

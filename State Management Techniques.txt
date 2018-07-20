@@ -1,0 +1,16 @@
+State Management Techniques
+
+Let us assume that someone is trying to access a banking website and he has to fill in a form. 
+So the person fills in the form and submits it. After submission of the form, the person realizes he has made a mistake. So he goes back to the form page and he sees that the information he submitted is lost. So he again fills in the entire form and submits it again. This is quite annoying for any user. So to avoid such problems "STATE MANAGEMENT" acts as a savior for developers like us.
+
+
+Definition - State Management can be defined as the technique or the way by which we can maintain / store the state of the page or application until the User's Session ends.
+
+
+State Management Techniques
+
+1. Cookies
+2. Query Strings
+3. Hidden Fields
+4. Session
+

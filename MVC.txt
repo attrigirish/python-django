@@ -1,0 +1,37 @@
+The MVC pattern was created to separate business logic from representation. MVC is the most popular architecture in use today. The MVC architecture divides an application into the following three layers:
+
+1. Model
+2. View
+3. Controller
+
+
+Models: Models represents how data is organized in the database. In other words, in MVC pattern we use models to define our database tables as well as relationships between them.
+
+Views: A view is what you see when you visit a site. For example: a blog post, a contact form etc, are all examples of views. A View contains all the information that will be eventually sent to the client i.e a web browser. Generally views are HTML documents.
+
+Controllers: Controller controls the flow of information. When you request a page that request is passed to the controller then it uses programmed logic to decide what information is needed to pull from the database and what information should it pass to the view. Controller is the heart of the MVC architecture because it acts as a glue between models and views.
+
+
+Here is a rundown of steps involved in an MVC blog application.
+
+1) Web browser or client sends the request to the web server, asking the server to display a blog post.
+
+2) The request received by the server is passed to the controller of the application.
+
+3) The controller asks the model to fetch the blog post.
+
+4) The model sends the blog post to the controller.
+
+5) The controller then passes the blog post data to the view.
+
+6) The view uses blog post data to create an html page.
+
+7) At last, the controller returns the HTML content to the client.
+
+
+Django MTV
+
+Django follows MVC pattern very closely but it uses slightly different terminology. Django is essentially a MTV (Model-Template-View) framework. Django uses templates for views and views for controller. In other words, in Django views are called templates and controllers are called views. Hence our HTML code will be in templates and Python code will be in views and models.
+
+
+

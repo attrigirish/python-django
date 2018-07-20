@@ -1,0 +1,41 @@
+Django Sessions
+
+Sessions are used to store user data on the server's computer. Session are more secure than the cookies as the actual data is stored on the server instead of client's computer.
+
+The session framework lets you store and retrieve arbitrary data on a per-site-visitor basis. It stores data on the server side and abstracts the sending and receiving of cookies. Cookies contain a session ID – not the data itself.
+
+
+Enabling Sessions : To enable or disable sessions in Django add or remove the follwing middleware from settings.py:
+
+-> django.contrib.sessions.middleware.SessionMiddleware
+
+Note: Make sure the following App is registered in the APPs list before using the sessions.
+
+'django.contrib.sessions'
+
+
+
+
+Saving Data in  Session:
+
+request.session['key']=value
+
+
+Reading Data from Session:
+
+request.session.get('key')
+
+
+Delete Session Data
+
+del request.session.get('key')
+
+
+
+Django Session Data Stores
+
+1. database (default)
+2. cache
+3. files
+
+
