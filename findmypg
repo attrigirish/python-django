@@ -1,0 +1,173 @@
+FindMyPG
+
+Tables/Models
+
+Model 'Owner'
+
+id
+name
+address
+phone
+email
+photo
+
+
+Model 'User'
+
+id
+name
+gender
+age
+address
+phone
+email
+photo
+
+
+Model 'PG'
+
+id
+ownerid
+address
+location
+city
+pin
+rent
+occupancy
+for 
+size
+rooms
+intime
+outtime
+
+
+Model 'Ameneties'
+
+id
+pgid
+ac
+watercooler
+waterpurifier
+geyser
+bed
+wifi
+meals
+parking
+
+
+Model 'Favorites'
+
+id
+userid
+pgid
+
+
+
+Model 'Ratings'
+
+id 
+userid
+pgid
+rating
+review
+date
+
+
+Model 'ContactOwner'
+
+id
+userid
+pgid
+message
+datetime
+
+
+Model 'PGImages'
+
+id
+pgid
+image
+
+
+
+
+Modules/App
+
+Main
+	- Create and Save Database Models
+	- Create and Save Forms
+
+
+User 
+	- CreateAccount
+	- ViewProfile
+	- UpdateProfile
+	- SaveFavorites
+	- ManageFavorites
+	- ContactOwner
+
+
+Owner
+	- CreateAccount
+	- ViewProfile
+	- UpdateProfile
+	- AddPG
+	- ManagePG
+	- ViewRequests
+
+
+Admin
+	- View/Edit User Profiles
+	- Block Users
+	- View/Edit Owner Profiles
+	- Block Owners
+	- View/Edit PG Registrations
+	- Monitor User's Favorites List
+	- Monitor User Messages
+
+
+
+
+
+
+
+
+Structure
+
+
+findmypg
+	- findmypg	
+	- main
+		- templates
+			-main
+		- static
+			-main
+				-css
+				-js
+				-images
+	- user
+		- templates
+			-user
+		- static
+			-user
+				-css
+				-js
+				-images
+	- owner
+		- templates
+			-owner
+		- static
+			-owner
+				-css
+				-js
+				-images
+	- administrator
+		- templates
+			-adminstrator
+		- static
+			-adminstrator
+				-css
+				-js
+				-images
+	- images
+
