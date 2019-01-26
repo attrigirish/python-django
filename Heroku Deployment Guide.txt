@@ -1,0 +1,27 @@
+#Step 1
+heroku login
+
+
+#Step 2 : Create root level static folder for production
+python manage.py collectstatic
+
+#Step 3
+git init
+
+#Step 4
+heroku git:remote -a findmypg
+
+#Step 5
+heroku config:set DISABLE_COLLECTSTATIC=1
+
+#Step 6
+git add .
+
+#Step 7
+git commit -am "Initial Commit"
+
+#Step 8
+git push heroku master
+
+#Step 9
+heroku ps:scale web=1 
