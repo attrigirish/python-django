@@ -1,0 +1,176 @@
+Template Expression
+
+A template is simply a text file. It can generate any text-based format (HTML, XML, CSV, etc.).
+
+A template contains variables, which get replaced with values when the template is evaluated, and tags, which control the logic of the template.
+
+
+
+Variables Expression
+---------------------
+
+{{varname}}
+
+Simple Variable
+
+{{name}}
+
+List
+
+{{lst.0}}
+
+Dictionary
+
+{{dct.name}}
+
+Object
+
+{{obj.name}}
+
+
+If Expression
+-------------
+
+{% if condition %}
+....
+{% else %}
+....
+{% endif %}
+
+
+Multiple If Else
+----------------
+
+{% if condition %}
+...
+{% elif condition %}
+...
+{% else %}
+...
+{% endif %}
+
+
+For Expression
+---------------
+
+{% for iterator in sequence %}
+...
+{% endfor %}
+
+
+
+
+Dynamic UI Rendering using Template Expressions
+------------------------------------------------
+
+def Page6(request):
+	data={}
+	data['loggedin']=True
+	response=render(request,'page6.html',data)
+	return response
+
+
+Template
+
+{% if loggedin == False %}
+<div>
+	<a href="login/">Login</a> |
+	<a href="register/">Register</a>
+</div>
+{% else %}
+<div>
+	<a href="home/">Welcome User</a> |
+	<a href="logout/">Logout</a>
+</div>
+{% endif %}
+
+
+---------------------------------------------
+
+def Page7(request):
+	data={}
+	data['usertype']='Admin'
+	response=render(request,'page7.html',data)
+	return response
+
+Template
+
+{% if usertype == 'Admin' %}
+<div>
+	<h1>Welcome Admin</h1>
+</div>
+{% elif usertype == 'Manager' %}
+<div>
+	<h1>Welcome Manager</h1>
+</div>
+{% else %}
+<div>
+	<h1>Welcome User
+</div>
+{% endif %}
+
+
+
+---------------------------------------
+
+def page8(request):
+	data={}
+	data['years']=list(range(2019,1903,-1))
+	response=render(request,'page8.html',data)
+	return response
+
+
+<select>
+	{% for year in years %}
+	<option>{{year}}</option>
+	{% endfor %}
+</select>
+
+
+---------------------------
+
+def Page9(request):
+	data={}
+	data['students']=[{'id':1,'name':'Anil','course':'Java','fees':16000}, {'id':2,'name':'Ravi','course':'PHP','fees':16000}]
+	response=render(request,'page9.html',data)
+	return response
+
+Template
+
+<table>
+	<tr>
+		<td>Id</td>
+		<td>Name</td>
+		<td>Course</td>
+		<td>Fees</td>
+	</tr>
+	{% for student in students %}
+	<tr>
+		<td>{{student.id}}</td>
+		<td>{{student.name}}</td>
+		<td>{{student.course}}</td>
+		<td>{{student.fees}}</td>		
+	</tr>
+	{% endfor %}
+</table>
+
+
+
+
+<table>
+	<tr>
+		<td>Id</td>
+		<td>Name</td>
+		<td>Course</td>
+		<td>Fees</td>
+	</tr>
+	<tr>
+	</tr>
+</table>
+
+
+
+
+
+
+

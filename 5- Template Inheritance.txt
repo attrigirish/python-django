@@ -1,0 +1,51 @@
+Template Inheritance
+---------------------
+
+
+The most powerful – and thus the most complex – part of Django’s template engine is template inheritance. Template inheritance allows you to build a base “skeleton” template that contains all the common elements of your site and defines blocks that child templates can override.
+
+
+base.html
+
+<html>
+	<head>
+	</head>
+	<body>
+		<div>
+			<h1>Header</h1>
+		</div>
+		<div>
+			<h1>Banner</h1>
+		</div>
+		<div>
+			<h1>Menu</h1>
+		</div>
+		<div>
+			{% block 'content' %}
+			{% endblock %}
+		</div>
+		<div>
+			<h1>Footer</h1>
+		</div>
+	</body>
+</html>
+
+
+Page10.html
+
+{% extends 'base.html' %}
+
+{% block 'content' %}
+<h1>Page Data</h1>
+
+
+Views
+
+def Page10(request):
+	response=render(request,'page10.html',None)
+	return response
+{% endblock %}
+
+
+
+

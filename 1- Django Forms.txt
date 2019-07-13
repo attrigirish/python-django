@@ -1,0 +1,145 @@
+Django Forms
+-------------
+
+Handling forms is a complex business. Consider a page where numerous items of data of several different types may need to be prepared for display in a form, rendered as HTML, edited using a convenient interface, returned to the server, validated and cleaned up, and then saved or passed on for further processing.
+
+Django’s form functionality can simplify and automate vast portions of this work, and can also do it more securely than most programmers would be able to do in code they wrote themselves.
+
+Django handles three distinct parts of the work involved in forms:
+
+1. preparing and restructuring data to make it ready for rendering
+2. creating HTML forms for the data
+3. receiving and processing submitted forms and data from the client
+
+It is possible to write code that does all of this manually, but Django can take care of it all for you.
+
+The Django Form class
+----------------------
+
+At the heart of this system of components is Django’s Form class. a Form class describes a form and determines how it works and appears.
+
+
+Django Fields
+--------------
+
+1. BooleanField
+2. CharField
+3. ChoiceField
+4. DateField
+5. DateTimeField
+6. DecimalField
+7. FileField
+8. FloatField
+9. ImageField
+10. IntegerField
+11. SlugField
+12. TimeField
+13. URLField
+
+
+
+Creating a form class
+---------------------
+
+Create a new file in your application and save it with 'forms.py'.
+
+
+forms.py
+----------
+
+from django import forms
+
+
+class StudentForm(forms.Form):
+	id=forms.IntegerField()
+	name=forms.CharField(max_length=20)
+	#course=forms.CharField(max_length=20)
+
+	course_choices=(
+		(0,'Select Courses'),
+		(1,'C'),
+		(2,'C++'),
+		(3,'Java')
+	)
+
+	course=forms.ChoiceField(choices=course_choices) #Drop Down List
+	#course=forms.ChoiceField(choices=course_choices,widget=forms.RadioSelect) #Radio List
+	#course=forms.ChoiceField(choices=course_choices,widget=forms.CheckboxSelectMultiple) #Checkbox List
+
+
+	fees=forms.FloatField()
+
+
+
+
+views.py
+
+from buyer.forms import *
+
+def DForm1(request):
+	form=StudentForm()
+	data={}
+	data['form']=form
+	response=render(request,'dform1.html',data)
+	return response
+
+
+
+dform1.html (Template)
+-----------
+
+<form method="post">
+	{% csrf_token %}
+	{{form.as_table}}
+	<input type="submit">
+	}
+</form>
+
+
+
+Methods of Renderings Forms
+---------------------------
+
+1. form.as_table
+2. form.as_p
+3. form.as_ul
+
+
+Manually Rendering form fields
+-------------------------------
+
+<table>
+	<tr>
+		<td>Id</td>
+		<td>{{form.id}}</td>
+	</tr>
+	<tr>
+		<td>Name</td>
+		<td>{{form.name}}</td>
+	</tr>
+	<tr>
+		<td>Course</td>
+		<td>{{form.course}}</td>
+	</tr>
+	<tr>
+		<td>Fees</td>
+		<td>{{form.fees}}</td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="submit"></td>
+	</tr>
+</table>
+
+
+
+views.py 
+---------
+
+def DForm2(reqeust):
+	#Bounded Form
+	formdata={'id':1,'name':'Girish','course':'Java','fees':16000.0}
+	form=StudentForm(formdata)
+	data={}
+	data['form']=form
+	response=render(request,'dform1.html',data)
+	return response

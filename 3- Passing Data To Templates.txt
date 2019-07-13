@@ -1,0 +1,119 @@
+View
+----------------------------
+
+def Page1(request):
+	#render(request,template,data)
+	data={}
+	data['name']='Girish Attri'
+	data['email']='girish@mail.com'
+
+	response=render(reqest,'page1.html',data)
+	return response
+
+
+
+Template(page1.html)
+--------------------
+<h1>Welcome {{name}}</h1>
+<p>Email : {{email}}</p>
+
+
+
+----------------------------------------------
+
+
+---------
+View
+---------
+
+#Passing Lists to Templates
+def Page2(request):
+	data={}
+	data['skills']=['C','C++','Python','Java']
+	response=render(request,'page2.html',data)
+	return response
+
+
+----------------------
+Template(page2.html)
+----------------------
+
+{{skills.0}} <br>
+{{skills.1}} <br>
+{{skills.2}} <br>
+{{skills.3}} 
+
+
+
+----------------------------------------------
+
+
+---------
+View
+---------
+
+#Passing Dictionary to Templates
+def Page3(request):
+	data={}
+	data['person']={'id':1,'name':'Ankit','course':'ACCP'}
+	response=render(request,'page3.html',data)
+	return response
+
+
+----------------------
+Template(page3.html)
+----------------------
+
+{{person.id}} <br>
+{{person.name}} <br>
+{{person.course}} <br>
+
+
+
+----------------------------------------------
+
+
+---------
+View
+---------
+
+#Passing Objects to Templates
+def Page4(request):
+	from buyer.classes import Bank
+	b=Bank()
+	b.acno=12345
+	b.name='Rahul'
+	b.branch='Rohini'
+	b.balance=100000
+
+	data={}
+	data['customer']=b
+	response=render(request,'page4.html',data)
+	return response
+
+
+----------------------
+Template(page4.html)
+----------------------
+
+{{customer.acno}} <br>
+{{customer.name}} <br>
+{{customer.branch}} <br>
+{{customer.balance}}
+
+
+
+
+-------------------
+Page5
+------------------
+
+View
+-----
+
+
+data={}
+data['name']='Girish Attri'
+data['email']='girish@mail.com'
+data['skills']=['C','C++','Python','HTML','Java']
+data['batches']=['batch1':'8-10 AM','batch2':'10-1 PM','batch3':'2-5PM']

@@ -1,0 +1,88 @@
+Form Processing in Django
+
+Web forms are used in a website to collect data from the users. 
+
+Accessing Form Data in Django
+
+Django provides inbuilt dictionary object to access the data sent by a user.
+	- request.GET 
+	- request.POST
+	- request.FILES
+
+	GET, POST and FILES dictionaries can be queried to access the data as sent by any user.
+
+	e.g.
+
+	request.GET['name']
+	or
+	request.GET.get('name')
+
+	request.POST['name']
+	or
+	request.POST.get('name')
+
+
+
+
+Template : Form1.html
+----------------------
+
+No. of Posted Valued : {{nvalues}}
+
+{% if nvalues == 0 %}
+ 
+ {{error.name}} <br>
+ {{error.email}} <br>
+ {{error.gender}} <br>
+ {{error.city}} <br>
+
+<form method="post">
+	{% csrf_token %}
+	Name : <input type="text" name="name"> <br>
+
+	Email : <input type="email" name="email"> <br>
+
+	Gender : <input type="radio" name="gender" value="Male"> Male 
+	<input  type="radio" name="gender" value="Female"> Female <br>
+
+	City : <select name="city">
+		<option>Select City</option>
+		<option>Delhi</option>
+		<option>Chennai</option>
+	</select>
+
+	<input type="submit">
+</form>
+{% else %}
+	<h1>Welcome {{name}}</h1>
+	<p>Email : {{email}}</p>
+	<p>Gender : {{gender}}</p>
+	<p>City : {{city}}</p>
+{% endif %}
+
+
+View : Form11
+-------------
+
+def Form11(request):
+	nvalues=len(request.POST)
+	data={}
+	data['nvalues']=nvalues
+
+	if(nvalues!=0):					#Upload Request
+		name=request.POST.get('name')
+		email=request.POST.get('email')
+		data['name']=name
+		data['email']=email
+
+	response=render(request,'form11.html',data)
+	return response
+
+
+
+	
+
+
+
+
+
