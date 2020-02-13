@@ -1,0 +1,65 @@
+#Uploading Files to Web Server
+
+Step 1 : Create a folder 'uploads' in your root directory.
+
+
+Step 2 : Create MEDIA_URL and MEDIA_ROOT properties in settings.py file.
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
+
+
+Step 3 : Create a static url/path for media requests in your urls.py file
+
+#Import for File Uploads#
+from django.conf import settings
+from django.conf.urls.static import static
+
+#Static Url for File Uploads#
+urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+
+Step 4 : Create a Model class with a FileField or ImageField property.
+
+class Profile(models.Model):
+	name=models.CharField(max_length=50)
+	photo=models.FileField()
+
+Step 5 : Make Migrations and Migrate the Model
+
+python manage.py makemigrations
+python manage.py migrate
+
+
+Step 6 : Create a form class with a CharField and FileField property in forms.py.
+
+class ProfileForm(forms.Form):
+	name=forms.CharField()
+	photo=forms.FileField()
+
+
+Step 7 : create a view function to render ProfileForm and handle file upload logic.
+
+def FileUploading1(request):
+	if(request.method=='GET'):
+		form=ProfileForm()
+		return render(request,'fileupload1.html',{'form':form})
+	else:
+		profile=Profile()	#Model
+		profile.name=request.POST.get('name')
+		profile.photo=request.FILES.get('photo')
+		profile.save()
+		rreturn HttpRequest('Profile Created Successfully')
+
+
+Step 8 : create a template 'fileupload1.html' 
+
+<form method='post' enctype="multipart/form-data">
+	{{form.name}}
+	{{form.photo}}
+	<input type="submit">
+</form>
+
+
+Step 9 : create a url in urls file and test the logic.
+
